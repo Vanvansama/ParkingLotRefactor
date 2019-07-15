@@ -1,5 +1,7 @@
 package com.thoughtworks.tdd;
 
+import com.thoughtworks.tdd.Exception.NotEnoughPositionException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class ParkingBoy extends Boy{
                 }
             }
             if (ticket == null) {
-                message = "Not enough position.";
+                throw new NotEnoughPositionException();
             }
             return ticket;
         }

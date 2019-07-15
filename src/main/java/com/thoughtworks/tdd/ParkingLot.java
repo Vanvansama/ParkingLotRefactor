@@ -1,5 +1,8 @@
 package com.thoughtworks.tdd;
 
+import com.thoughtworks.tdd.Exception.NotEnoughPositionException;
+import com.thoughtworks.tdd.Exception.UnrecognizedParkingTicketException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,8 +25,9 @@ public class ParkingLot {
             Ticket ticket = new Ticket(car, this);
             carList.put(ticket, car);
             return ticket;
+        }else {
+            throw new NotEnoughPositionException();
         }
-        return null;
     }
 
     public Car fetchCar(Ticket ticket) {
@@ -31,8 +35,9 @@ public class ParkingLot {
             Car car = carList.get(ticket);
             carList.remove(ticket);
             return car;
+        }else {
+            throw new UnrecognizedParkingTicketException();
         }
-        return null;
     }
 
     public int positionsAvailable() {

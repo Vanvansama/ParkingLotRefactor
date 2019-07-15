@@ -1,7 +1,7 @@
 package com.thoughtworks.tdd;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.thoughtworks.tdd.Exception.NotEnoughPositionException;
+
 
 /**
  * Create with IDEA
@@ -28,7 +28,7 @@ public class SmartParkingBoy extends Boy {
                 ParkingLot parkingLot = parkingLotList.get(index);
                 ticket = parkingLot.parkingCar(car);
             }else{
-                message = "Not enough position.";
+                throw new NotEnoughPositionException();
             }
             return ticket;
         }

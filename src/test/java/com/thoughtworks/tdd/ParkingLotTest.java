@@ -1,5 +1,8 @@
 package com.thoughtworks.tdd;
 
+import com.thoughtworks.tdd.Exception.NotEnoughPositionException;
+import com.thoughtworks.tdd.Exception.PleaseProvideYourParkingTicketException;
+import com.thoughtworks.tdd.Exception.UnrecognizedParkingTicketException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -58,14 +61,7 @@ public class ParkingLotTest {
 
     @Test
     public void should_return_null_when_fetch_car_given_wrong_ticket() {
-        //given
-        Ticket fakeTicket = null;
-        //when
-        Car fetchCar = parkingBoy.fetchCar(fakeTicket);
-        String message = parkingBoy.showMessage();
-        //then
-        Assertions.assertSame(null, fetchCar);
-        Assertions.assertSame("Please provide your parking ticket.", message);
+        Assertions.assertThrows(PleaseProvideYourParkingTicketException.class, () -> parkingBoy.fetchCar(null));
     }
 
     @Test
@@ -76,11 +72,8 @@ public class ParkingLotTest {
         Ticket ticket = parkingBoy.parkingCar(car);
         //when
         Car fetchCar = parkingBoy.fetchCar(ticket);
-        Car fetchCarAgain = parkingBoy.fetchCar(ticket);
-        String message = parkingBoy.showMessage();
         //then
-        Assertions.assertSame(null, fetchCarAgain);
-        Assertions.assertSame("Unrecognized parking ticket.", message);
+        Assertions.assertThrows(UnrecognizedParkingTicketException.class, () -> parkingBoy.fetchCar(ticket));
     }
 
     @Test
@@ -93,11 +86,7 @@ public class ParkingLotTest {
         }
         //when
         Car car = new Car("BMW", "123456");
-        Ticket ticket = parkingBoy.parkingCar(car);
-        String message = parkingBoy.showMessage();
-        //then
-        Assertions.assertSame(null, ticket);
-        Assertions.assertSame("Not enough position.", message);
+        Assertions.assertThrows(NotEnoughPositionException.class, () -> parkingBoy.parkingCar(car));
     }
 
     @Test

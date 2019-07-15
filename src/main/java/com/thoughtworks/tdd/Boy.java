@@ -1,5 +1,7 @@
 package com.thoughtworks.tdd;
 
+import com.thoughtworks.tdd.Exception.PleaseProvideYourParkingTicketException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +13,6 @@ import java.util.List;
  * @Description:
  */
 public abstract class Boy implements Parkable{
-    protected String message;
     protected List<ParkingLot> parkingLotList = new ArrayList<>();
 
     @Override
@@ -20,20 +21,11 @@ public abstract class Boy implements Parkable{
     @Override
     public Car fetchCar(Ticket ticket){
         if (ticket != null) {
-            Car car = ticket.getParkingLot().fetchCar(ticket);
-            if (car == null) {
-                message = "Unrecognized parking ticket.";
-            }
-            return car;
+            return ticket.getParkingLot().fetchCar(ticket);
 
         } else {
-            message = "Please provide your parking ticket.";
-            return null;
+            throw new PleaseProvideYourParkingTicketException();
         }
-    }
-
-    public String showMessage() {
-        return message;
     }
 
     public void setParkingLot(ParkingLot parkingLot) {
