@@ -17,17 +17,11 @@ public class ParkingBoy extends Boy{
     @Override
     public Ticket parkingCar(Car car) {
         if (car != null) {
-            Ticket ticket = null;
-            for (ParkingLot parkingLot : parkingLotList) {
-                ticket = parkingLot.parkingCar(car);
-                if (ticket != null) {
-                    break;
-                }
-            }
-            if (ticket == null) {
+            ParkingLot parkingLotActual = parkingLotList.stream().filter(parkingLot -> !parkingLot.isFull()).findFirst().orElse(null);
+            if (parkingLotActual == null){
                 throw new NotEnoughPositionException();
             }
-            return ticket;
+            return  parkingLotActual.parkingCar(car);
         }
         return null;
     }

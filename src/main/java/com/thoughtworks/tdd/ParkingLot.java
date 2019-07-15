@@ -40,6 +40,10 @@ public class ParkingLot {
         }
     }
 
+    public boolean isFull(){
+        return carList.size() >= CAR_NUMBER;
+    }
+
     public int positionsAvailable() {
         return CAR_NUMBER - carList.size();
     }
