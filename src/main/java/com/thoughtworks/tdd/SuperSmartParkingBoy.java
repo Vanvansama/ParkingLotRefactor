@@ -2,6 +2,8 @@ package com.thoughtworks.tdd;
 
 import com.thoughtworks.tdd.Exception.NotEnoughPositionException;
 
+import java.util.Comparator;
+
 /**
  * Create with IDEA
  *
@@ -14,26 +16,11 @@ public class SuperSmartParkingBoy extends Boy {
     @Override
     public Ticket parkingCar(Car car) {
         if (car != null) {
-            Ticket ticket = null;
-            float temp = 0;
-            int index = -1;
-            for (int i = 0; i < parkingLotList.size(); i++) {
-                ParkingLot parkingLot = parkingLotList.get(i);
-                float available = parkingLot.positionsAvailable();
-                float lotSize = parkingLot.getParkingLotSize();
-                float size = available / lotSize;
-                if (size > temp) {
-                    temp = size;
-                    index = i;
-                }
-            }
-            if (temp > 0) {
-                ParkingLot parkingLot = parkingLotList.get(index);
-                ticket = parkingLot.parkingCar(car);
-            } else {
+            ParkingLot parkingLot = parkingLotList.stream().max(Comparator.comparingDouble(ParkingLot::getAvailablePositionRate)).orElse(null);
+            if (parkingLot == null){
                 throw new NotEnoughPositionException();
             }
-            return ticket;
+            return  parkingLot.parkingCar(car);
         }
         return null;
     }

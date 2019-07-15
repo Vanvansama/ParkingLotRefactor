@@ -3,10 +3,7 @@ package com.thoughtworks.tdd;
 import com.thoughtworks.tdd.Exception.NotEnoughPositionException;
 import com.thoughtworks.tdd.Exception.UnrecognizedParkingTicketException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Create with IDEA
@@ -52,7 +49,25 @@ public class ParkingLot {
         return CAR_NUMBER;
     }
 
+    public double getAvailablePositionRate(){
+        return (double)positionsAvailable()/(double)getParkingLotSize();
+    }
+
     public void setManage(ParkingLotManage manage) {
         this.manage = manage;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {return true;}
+        if (o == null || getClass() != o.getClass()) {return false;}
+        ParkingLot that = (ParkingLot) o;
+        return Objects.equals(carList, that.carList) &&
+                Objects.equals(manage, that.manage);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(carList, manage);
     }
 }
