@@ -12,11 +12,12 @@ import java.util.*;
  * @Date: Create in 11:33 2019/7/14
  * @Description:
  */
-public class ParkingLot {
+public class ParkingLot implements Parkable{
     private final static int CAR_NUMBER = 10;
     private Map<Ticket, Car> carList = new HashMap<>(CAR_NUMBER);
     private ParkingLotManage manage;
 
+    @Override
     public Ticket parkingCar(Car car) {
         if (carList.size() < CAR_NUMBER) {
             Ticket ticket = new Ticket(car, this);
@@ -27,6 +28,7 @@ public class ParkingLot {
         }
     }
 
+    @Override
     public Car fetchCar(Ticket ticket) {
         if (carList.containsKey(ticket)) {
             Car car = carList.get(ticket);
