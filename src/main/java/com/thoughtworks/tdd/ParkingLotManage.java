@@ -10,14 +10,30 @@ import java.util.List;
  * @Date: Create in 18:07 2019/7/14
  * @Description:
  */
-public class ParkingLotManage extends ParkingBoy {
-    private List<Boy> parkingBoyList = new ArrayList<>();
+public class ParkingLotManage{
+    private List<Parkable> parkables = new ArrayList<>();
 
-    public void addParkingBoy(Boy boy){
-        parkingBoyList.add(boy);
+    public Ticket parkingCar(Car car){
+        for (Parkable parkable : parkables) {
+            Ticket ticket = parkable.parkingCar(car);
+            if (ticket != null ){
+                return ticket;
+            }
+        }
+        return null;
     }
 
-    public List<Boy> getParkingBoyList() {
-        return parkingBoyList;
+    public Car fetchCar(Ticket ticket){
+        for (Parkable parkable : parkables) {
+            Car car = parkable.fetchCar(ticket);
+            if (car != null ){
+                return car;
+            }
+        }
+        return null;
+    }
+
+    public void setParkables(Parkable parkable){
+        parkables.add(parkable);
     }
 }
