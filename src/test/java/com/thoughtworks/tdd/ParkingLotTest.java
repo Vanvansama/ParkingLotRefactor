@@ -155,71 +155,71 @@ public class ParkingLotTest {
         Assertions.assertSame(parkingLotTwo, parkingLotActual);
     }
 
-    @Test
-    public void should_return_car_when_manage_specify_parkingBoy_given_car() {
-        //given
-        manage.addParkingBoy(smartParkingBoy);
-        smartParkingBoy.setParkingLot(parkingLot);
-        List<Boy> parkingBoys = manage.getParkingBoyList();
-        Car car = new Car("BMW", "123456");
-        Ticket ticket = null;
-        for (Boy boy : parkingBoys) {
-            ticket = boy.parkingCar(car);
-        }
-        //when
-        Car fetchCar = superSmartParkingBoy.fetchCar(ticket);
-        //then
-        Assertions.assertSame(car, fetchCar);
-    }
-
-    @Test
-    public void should_return_car_when_manage_given_car() {
-        //given
-        manage.setParkingLot(parkingLot);
-        Car car = new Car("BMW", "123456");
-        Ticket ticket = manage.parkingCar(car);
-        //when
-        Car fetchCar = manage.fetchCar(ticket);
-        //then
-        Assertions.assertSame(car, fetchCar);
-    }
-
-    @Test
-    public void should_return_null_when_manage_fetch_car_given_wrong_ticket() {
-        //given
-        manage.addParkingBoy(smartParkingBoy);
-        smartParkingBoy.setParkingLot(parkingLot);
-        List<Boy> parkingBoys = manage.getParkingBoyList();
-        Ticket fakeTicket = null;
-        //when
-        Car fetchCar = null;
-        String message = null;
-        for (Boy boy : parkingBoys) {
-            fetchCar = boy.fetchCar(fakeTicket);
-            message = boy.showMessage();
-        }
-        //then
-        Assertions.assertSame(null, fetchCar);
-        Assertions.assertSame("Please provide your parking ticket.", message);
-    }
-
-    @Test
-    public void should_return_null_when_manage_fetch_car_given_used_tickets() {
-        //given
-        manage.addParkingBoy(smartParkingBoy);
-        smartParkingBoy.setParkingLot(parkingLot);
-        List<Boy> parkingBoys = manage.getParkingBoyList();
-        Car car = new Car("BMW", "123456");
-        SmartParkingBoy parkingBoy = (SmartParkingBoy) parkingBoys.get(0);
-        Ticket ticket = parkingBoy.parkingCar(car);
-        //when
-        Car fetchCar = parkingBoy.fetchCar(ticket);
-        Car fetchCarAgain = parkingBoy.fetchCar(ticket);
-        String message = parkingBoy.showMessage();
-        //then
-        Assertions.assertSame(null, fetchCarAgain);
-        Assertions.assertSame("Unrecognized parking ticket.", message);
-    }
+//    @Test
+//    public void should_return_car_when_manage_specify_parkingBoy_given_car() {
+//        //given
+//        manage.addParkingBoy(smartParkingBoy);
+//        smartParkingBoy.setParkingLot(parkingLot);
+//        List<Boy> parkingBoys = manage.getParkingBoyList();
+//        Car car = new Car("BMW", "123456");
+//        Ticket ticket = null;
+//        for (Boy boy : parkingBoys) {
+//            ticket = boy.parkingCar(car);
+//        }
+//        //when
+//        Car fetchCar = superSmartParkingBoy.fetchCar(ticket);
+//        //then
+//        Assertions.assertSame(car, fetchCar);
+//    }
+//
+//    @Test
+//    public void should_return_car_when_manage_given_car() {
+//        //given
+//        manage.setParkingLot(parkingLot);
+//        Car car = new Car("BMW", "123456");
+//        Ticket ticket = manage.parkingCar(car);
+//        //when
+//        Car fetchCar = manage.fetchCar(ticket);
+//        //then
+//        Assertions.assertSame(car, fetchCar);
+//    }
+//
+//    @Test
+//    public void should_return_null_when_manage_fetch_car_given_wrong_ticket() {
+//        //given
+//        manage.addParkingBoy(smartParkingBoy);
+//        smartParkingBoy.setParkingLot(parkingLot);
+//        List<Boy> parkingBoys = manage.getParkingBoyList();
+//        Ticket fakeTicket = null;
+//        //when
+//        Car fetchCar = null;
+//        String message = null;
+//        for (Boy boy : parkingBoys) {
+//            fetchCar = boy.fetchCar(fakeTicket);
+//            message = boy.showMessage();
+//        }
+//        //then
+//        Assertions.assertSame(null, fetchCar);
+//        Assertions.assertSame("Please provide your parking ticket.", message);
+//    }
+//
+//    @Test
+//    public void should_return_null_when_manage_fetch_car_given_used_tickets() {
+//        //given
+//        manage.addParkingBoy(smartParkingBoy);
+//        smartParkingBoy.setParkingLot(parkingLot);
+//        List<Boy> parkingBoys = manage.getParkingBoyList();
+//        Car car = new Car("BMW", "123456");
+//        SmartParkingBoy parkingBoy = (SmartParkingBoy) parkingBoys.get(0);
+//        Ticket ticket = parkingBoy.parkingCar(car);
+//        //when
+//        Car fetchCar = parkingBoy.fetchCar(ticket);
+//        Car fetchCarAgain = parkingBoy.fetchCar(ticket);
+//        String message = parkingBoy.showMessage();
+//        //then
+//        Assertions.assertSame(null, fetchCarAgain);
+//        Assertions.assertSame("Unrecognized parking ticket.", message);
+//    }
 
 
 }

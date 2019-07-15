@@ -10,12 +10,14 @@ import java.util.List;
  * @Date: Create in 17:30 2019/7/14
  * @Description:
  */
-public abstract class Boy {
+public abstract class Boy implements Parkable{
     protected String message;
     protected List<ParkingLot> parkingLotList = new ArrayList<>();
 
-    abstract Ticket parkingCar(Car car);
+    @Override
+    public abstract Ticket parkingCar(Car car);
 
+    @Override
     public Car fetchCar(Ticket ticket){
         if (ticket != null) {
             Car car = ticket.getParkingLot().fetchCar(ticket);

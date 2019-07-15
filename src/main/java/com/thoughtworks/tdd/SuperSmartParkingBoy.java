@@ -8,8 +8,9 @@ package com.thoughtworks.tdd;
  * @Description:
  */
 public class SuperSmartParkingBoy extends Boy {
+
     @Override
-    Ticket parkingCar(Car car) {
+    public Ticket parkingCar(Car car) {
         if (car != null) {
             Ticket ticket = null;
             float temp = 0;
